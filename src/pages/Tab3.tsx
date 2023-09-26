@@ -15,7 +15,7 @@ const Tab3: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <div className="grid min-h-full place-content-center">
+        <div className="grid min-h-full under place-content-center">
           <h1>Hello, Tab 3!</h1>
         </div>
       </IonContent>

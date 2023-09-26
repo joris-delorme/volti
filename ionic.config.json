@@ -1,0 +1,7 @@
+{
+  "name": "volti",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
