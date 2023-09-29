@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
  
@@ -5,10 +6,4 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const firebaseError = (err: Error) => {
-  if (!err.message) return "Please Try Again"
-  if (err.message === "Firebase: Error (auth/wrong-password)." || err.message === 'Firebase: Error (auth/user-not-found).') return "Mauvais mot de pass ou adresse email."
-  if (err.message === "Firebase: Error (auth/invalid-email).") return "Veuillez entrez une adresse mail valide."
-  if (err.message === "Firebase: Error (auth/email-already-in-use).") return "Cette adresse mail est déjà utilisé."
-  return err.message
-}
+export const supabase = createClient('https://fyvhhrgqiyefkzkijifz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5dmhocmdxaXllZmt6a2lqaWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU4ODk0MDYsImV4cCI6MjAxMTQ2NTQwNn0.2_gte6HPIXEtS2wj-Rg0t_-VmQqnDmjWBp0IREROzzg')

@@ -1,32 +1,60 @@
 import {
   IonApp,
+  IonContent,
+  IonPage,
   setupIonicReact,
 } from '@ionic/react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from './firebase'
-import { useEffect } from 'react'
-import { Loader } from './components/ui/loader'
-import Login from './pages/login'
+import { useEffect, useState } from 'react'
+import { SignIn } from '@/pages/signin'
+import { Home } from '@/pages/home'
+import { Welcome } from '@/pages/welcome'
+import { SignUp } from '@/pages/signup'
+import { supabase } from '@/lib/utils'
+import { Session } from '@supabase/supabase-js'
+import { useAuth } from './context/AuthContext'
 
 setupIonicReact()
 
-const App: React.FC = () => {
+const App = () => {
 
+  const [currentSession, setCurrentSession] = useState<Session | null | undefined>(undefined)
   const navigate = useNavigate()
-  const [user, loading] = useAuthState(auth)
+  const { session, setSessionData } = useAuth()
 
   useEffect(() => {
-    if (!user && !loading) navigate('/login')
-  }, [user, loading])
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session === null) navigate('/welcome')
+      setSessionData(session)
+      setCurrentSession(session)
+    })
 
-  if (loading) return <div className="h-screen w-screen flex items-center justify-center"><Loader /></div>
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSessionData(session)
+      setCurrentSession(session)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (session === null) navigate('/welcome')
+  }, [session])
+
+  if (currentSession === undefined) {
+    return (<IonPage><IonContent></IonContent></IonPage>)
+  }
 
   return (
     <IonApp>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <IonPage>
+        <IonContent>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </IonContent>
+      </IonPage>
     </IonApp>
   )
 }

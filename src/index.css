@@ -8,20 +8,18 @@
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
-
-@import 'mapbox-gl/dist/mapbox-gl.css';
-
-/* Theme variables for Ionic */
-@import './theme/variables.css';
-
-/* Core CSS required for Ionic components to work properly */
-@import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-@import '@ionic/react/css/normalize.css';
-@import '@ionic/react/css/structure.css';
-@import '@ionic/react/css/typography.css';
-
+ 
+ /* Theme variables for Ionic */
+ @import './theme/variables.css';
+ 
+ /* Core CSS required for Ionic components to work properly */
+ @import '@ionic/react/css/core.css';
+ 
+ /* Basic CSS for apps built with Ionic */
+ @import '@ionic/react/css/normalize.css';
+ @import '@ionic/react/css/structure.css';
+ @import '@ionic/react/css/typography.css';
+ 
 
 /* Tailwind CSS */
 @tailwind base;
@@ -30,6 +28,7 @@
 
 
 @layer base {
+
     :root {
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
@@ -49,7 +48,7 @@
         --muted: 240 4.8% 95.9%;
         --muted-foreground: 240 3.8% 46.1%;
 
-        --accent: 240 4.8% 95.9%;
+        --accent: 216 100% 54%;
         --accent-foreground: 240 5.9% 10%;
 
         --destructive: 0 84.2% 60.2%;
@@ -81,7 +80,7 @@
         --muted: 240 3.7% 15.9%;
         --muted-foreground: 240 5% 64.9%;
 
-        --accent: 240 3.7% 15.9%;
+        --accent: 216 100% 54%;
         --accent-foreground: 0 0% 98%;
 
         --destructive: 0 62.8% 30.6%;
@@ -100,5 +99,36 @@
 
     body {
         @apply bg-background text-foreground;
+    }
+
+    input, textarea, select {
+        font-size: 16px;
+        max-height: 100%; 
+        overflow-y: auto; 
+    }
+
+    .marker {
+        background-image: url('./marker.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .gradient-button {
+        text-transform: none;
+        font-weight: 700;
+        --color: #fff;
+        --background: #2182dd;
+        --background-activated: #2998FF;
+    }
+
+    .welcome {
+        --background: none;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
     }
 }
