@@ -10,7 +10,8 @@ import {
     IonInput,
     IonLabel,
     IonItem,
-    useIonToast
+    useIonToast,
+    IonHeader
 } from '@ionic/react';
 import { supabase } from '@/lib/utils';
 import { Input } from './ui/input';
@@ -68,6 +69,7 @@ export const AddFavorisModal = ({ isOpen, onClose }: { isOpen: boolean, onClose:
                 position: 'top',
                 color: 'success'
             })
+            onClose()
         }
 
         setLoading(false)
@@ -75,16 +77,18 @@ export const AddFavorisModal = ({ isOpen, onClose }: { isOpen: boolean, onClose:
     }
 
     return (
-        <IonModal isOpen={isOpen}>
-            <IonToolbar>
-                <IonTitle>Ajouté un favoris</IonTitle>
-                <IonButtons slot="start">
-                    <IonButton onClick={onClose}>Annuler</IonButton>
-                </IonButtons>
-                <IonButtons slot="end">
-                    <IonButton onClick={() => addToFavoris()}>Ajouté</IonButton>
-                </IonButtons>
-            </IonToolbar>
+        <IonModal isOpen={isOpen} className='ion-padding'>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>Ajouté un favoris</IonTitle>
+                    <IonButtons slot="start">
+                        <IonButton onClick={onClose}>Annuler</IonButton>
+                    </IonButtons>
+                    <IonButtons slot="end">
+                        <IonButton onClick={() => addToFavoris()}>Ajouté</IonButton>
+                    </IonButtons>
+                </IonToolbar>
+            </IonHeader>
             <IonContent>
                 <div className="p-4 grid gap-6">
                     <div className='grid gap-2'>

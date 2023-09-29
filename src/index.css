@@ -131,4 +131,12 @@
         background-size: cover;
         height: 100vh;
     }
+
+    html {
+        --ion-safe-area-top: 25px;
+    }
+
+    .ion-modal-safe-area {
+        padding-top: var(--ion-safe-area-top);
+      }
 }
